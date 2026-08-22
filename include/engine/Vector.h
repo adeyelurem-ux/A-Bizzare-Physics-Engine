@@ -1,0 +1,8 @@
+//
+// Created by Michael Adeyelure on 22/08/2026.
+//
+
+#ifndef A_BIZZARE_PHYSICS_ENGINE_VECTORN_H
+#define A_BIZZARE_PHYSICS_ENGINE_VECTORN_H
+
+#endif //A_BIZZARE_PHYSICS_ENGINE_VECTORN_H
