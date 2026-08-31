@@ -1,8 +1,0 @@
-//
-// Created by Michael Adeyelure on 30/08/2026.
-//
-
-#ifndef BIZZAREPHYSICS_PHYSICSWORLD_H
-#define BIZZAREPHYSICS_PHYSICSWORLD_H
-
-#endif //BIZZAREPHYSICS_PHYSICSWORLD_H
