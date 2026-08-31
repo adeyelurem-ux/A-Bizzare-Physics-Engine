@@ -15,7 +15,7 @@ private:
     std::vector<std::size_t> free_indices;
 
 public:
-    static void update(double dt);
+    void update(double dt);
 
     std::size_t create_2d_body(Vector<2> position, double mass, double width, double height, bool fixed);
     void destroy_2d_body(std::size_t index);
