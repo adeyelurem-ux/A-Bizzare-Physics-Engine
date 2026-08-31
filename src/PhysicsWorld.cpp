@@ -4,8 +4,30 @@
 
 #include "../include/engine/BPhysics/PhysicsWorld.h"
 
-void PhysicsWorld::update(double dt) {
+#include "engine/maths/EulerIntegrator.h"
 
+void PhysicsWorld::update(const double dt) {
+    for (auto& body : bodies) {
+        if (!body.alive || body.fixed)
+            continue;
+
+        const Vector<2> acceleration = body.net_force/body.mass;
+
+        body.velocity = EulerIntegrator::step(0, body.velocity, dt,
+        [&acceleration](double t, const Vector<2>& v) {
+            return acceleration;
+        }
+        );
+
+        body.position = EulerIntegrator::step(0, body.position, dt,
+        [&body](double t, const Vector<2>& r) {
+            return body.velocity;
+        }
+        );
+
+
+        body.net_force = {0, 0};
+    }
 }
 
 

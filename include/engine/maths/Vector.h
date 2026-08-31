@@ -11,6 +11,7 @@
 #include <cmath>
 #include <algorithm>
 #include <initializer_list>
+#include <iostream>
 
 
 template<std::size_t N>
@@ -114,6 +115,18 @@ struct Vector {
         result /= scalar;
 
         return result;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Vector<N>& vec) {
+        os << "(";
+        for (std::size_t i = 0; i < N; ++i) {
+            os << vec.data[i];
+            if (i < N - 1) {
+                os << ", ";
+            }
+        }
+        os << ")";
+        return os;
     }
 
 
