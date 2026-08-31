@@ -13,9 +13,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(${PROJECT_NAME}
         include/engine/Vector.h
         src/dummy.cpp
+        include/engine/PhysicsWorld.h
 )
 
-target_include_directories(${PROJECT_NAME} INTERFACE
+target_include_directories(${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
@@ -26,7 +27,7 @@ add_executable(Sandbox
 # Link the engine library to the executable
 target_link_libraries(Sandbox
         PRIVATE
-        Engine
+        ${PROJECT_NAME}
 )
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
