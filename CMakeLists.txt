@@ -11,9 +11,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(${PROJECT_NAME}
-        include/engine/Vector.h
+        include/engine/maths/Vector.h
         src/dummy.cpp
-        include/engine/PhysicsWorld.h
+        include/engine/BPhysics/PhysicsWorld.h
+        include/engine/BPhysics/RigidBody2D.h
+        src/PhysicsWorld.cpp
+        include/engine/maths/EulerIntegrator.h
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
