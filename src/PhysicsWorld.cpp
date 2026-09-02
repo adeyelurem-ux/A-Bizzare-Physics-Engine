@@ -13,19 +13,8 @@ void PhysicsWorld::update(const double dt) {
 
         const Vector<2> acceleration = body.net_force/body.mass;
 
-        body.velocity = EulerIntegrator::step(0, body.velocity, dt,
-        [&acceleration](double t, const Vector<2>& v) {
-            return acceleration;
-        }
-        );
-
-        body.position = EulerIntegrator::step(0, body.position, dt,
-        [&body](double t, const Vector<2>& r) {
-            return body.velocity;
-        }
-        );
-
-
+        body.velocity += acceleration * dt;
+        body.position += body.velocity * dt;
         body.net_force = {0, 0};
     }
 
@@ -40,7 +29,7 @@ void PhysicsWorld::resolve_collisions(const double dt) {
 
     // Slop & Baumgarte factor for sinking prevention
     const double slop = 0.01;      // Allowed penetration before correcting
-    const double percent = 0.2;    // Penetration percentage corrected per frame
+    const double percent = 0.02;    // Penetration percentage corrected per frame
 
     for (std::size_t i = 0; i < count; ++i) {
         for (std::size_t j = i + 1; j < count; ++j) {
@@ -111,7 +100,7 @@ std::size_t PhysicsWorld::create_2d_body(const Vector<2> position, const double 
         return index;
     }
 
-    bodies.emplace_back(position, mass, width, height, fixed);
+    bodies.emplace_back(position, mass, restitution, width, height, fixed);
     return bodies.size() - 1;
 }
 

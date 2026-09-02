@@ -6,16 +6,17 @@
 #include "engine/BPhysics/PhysicsWorld.h"
 
 int main() {
-    PhysicsWorld physics_world;
+    PhysicsWorld world;
+    std::size_t body1 = world.create_2d_body({-10, 0}, 1, 0.6, 1, 1, false);
+    std::size_t body2 = world.create_2d_body({10, 0}, 2, 0.6, 2, 1, false);
 
-    physics_world.create_2d_body({0, 0}, 1, 0, 0, false);
+    world.get_2d_body(body1).velocity = {1, 0};
+    world.get_2d_body(body2).velocity = {-1, 0};
 
-    for (int i = 0; i < 500; i++) {
-        physics_world.get_2d_body(0).net_force = physics_world.get_2d_body(0).mass * Vector<2> {0, -9.81};
-        std::cout << "Position: " << physics_world.get_2d_body(0).position <<
-            "\nVelocity: " << physics_world.get_2d_body(0).velocity <<
-                "\nNet Force: " << physics_world.get_2d_body(0).net_force << "\n\n";
-
-        physics_world.update(1);
+    for (int64_t i = 0; i < 100000; i++) {
+        world.update(0.1);
+        std::cout << "Position 1: " << world.get_2d_body(body1).position << "\nVelocity 1: "
+        << world.get_2d_body(body1).velocity << "\nPosition 2: " << world.get_2d_body(body2).position << "\nVelocity 2: "
+        << world.get_2d_body(body2).velocity << "\n\n";
     }
 }

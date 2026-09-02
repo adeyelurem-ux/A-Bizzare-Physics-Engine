@@ -9,6 +9,9 @@ project("BizzarePhysics" CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+enable_testing()
 
 add_library(${PROJECT_NAME}
         include/engine/maths/Vector.h
@@ -32,5 +35,28 @@ target_link_libraries(Sandbox
         PRIVATE
         ${PROJECT_NAME}
 )
+
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+add_executable(BizzareTests
+        tests/test_collisions.cpp
+)
+
+target_link_libraries(BizzareTests
+        PRIVATE
+        ${PROJECT_NAME}
+        gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(BizzareTests)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Sandbox)
