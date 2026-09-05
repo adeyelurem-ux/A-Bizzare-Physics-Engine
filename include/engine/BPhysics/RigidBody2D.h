@@ -15,13 +15,15 @@ struct RigidBody2D {
     double width = 0;
     double height = 0;
 
-    double mass = 0;
+    double mass = 1;
+    double restitution = 1;
 
     bool alive = true;
     bool fixed = false;
 
-    RigidBody2D(Vector<2> position, double mass, double width, double height, bool fixed) :
-    position(position), width(width), height(height), mass(mass), fixed(fixed) {}
+    RigidBody2D(Vector<2> position, double mass, double restitution = 1, double width = 0, double height = 0,
+        bool fixed = false) :
+    position(position), width(width), height(height), mass(mass), restitution(restitution), fixed(fixed) {}
 };
 
 #endif //BIZZAREPHYSICS_RIGIDBODY2D_H

@@ -16,8 +16,9 @@ private:
 
 public:
     void update(double dt);
+    void resolve_collisions(double dt);
 
-    std::size_t create_2d_body(Vector<2> position, double mass, double width, double height, bool fixed);
+    std::size_t create_2d_body(Vector<2> position, double mass, double restitution, double width, double height, bool fixed);
     void destroy_2d_body(std::size_t index);
 
     RigidBody2D& get_2d_body(std::size_t index);
