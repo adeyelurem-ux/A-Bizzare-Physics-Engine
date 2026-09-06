@@ -181,6 +181,11 @@ struct Vector {
     void normalize() noexcept {
         normalise();
     }
+
+    [[nodiscard]] static constexpr Vector project(const Vector& a, const Vector& b) {
+        assert(b.magnitudeSqd() != 0.0 && "Cannot have magnitude 0");
+        return a.dot(b)/b.magnitudeSqd();
+    }
 };
 
 #endif //A_BIZZARE_PHYSICS_ENGINE_VECTORN_H
